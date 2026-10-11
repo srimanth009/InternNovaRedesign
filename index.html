@@ -1,0 +1,1700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>InternNova – Launch Your Career</title>
+  <meta name="description" content="InternNova offers real-world internship programs, mentorship and workshops to help students launch their careers." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      color: #1a1a2e;
+      background: #fff;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    /* ===== CSS VARIABLES ===== */
+    :root {
+      --primary: #6c3ce1;
+      --primary-dark: #5228c4;
+      --primary-light: #ede9ff;
+      --accent: #f97316;
+      --accent-light: #fff4ed;
+      --teal: #06b6d4;
+      --teal-light: #e0f7fa;
+      --success: #10b981;
+      --dark: #1a1a2e;
+      --dark-2: #16213e;
+      --gray: #6b7280;
+      --gray-light: #f3f4f6;
+      --gray-border: #e5e7eb;
+      --white: #ffffff;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+      --shadow: 0 4px 16px rgba(108,60,225,.10);
+      --shadow-lg: 0 10px 40px rgba(108,60,225,.15);
+      --radius: 12px;
+      --radius-lg: 20px;
+      --transition: 0.3s cubic-bezier(.4,0,.2,1);
+    }
+
+    /* ===== UTILITY ===== */
+    .container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+    .section-label {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--primary);
+      background: var(--primary-light);
+      border-radius: 100px;
+      padding: 4px 14px;
+      margin-bottom: 14px;
+    }
+    .section-title {
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      font-weight: 800;
+      line-height: 1.2;
+      color: var(--dark);
+      margin-bottom: 14px;
+    }
+    .section-sub {
+      font-size: 1rem;
+      color: var(--gray);
+      max-width: 560px;
+    }
+    .section-head { text-align: center; margin-bottom: 56px; }
+    .section-head .section-sub { margin: 0 auto; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .95rem;
+      font-weight: 600;
+      border-radius: 100px;
+      padding: 13px 28px;
+      cursor: pointer;
+      border: none;
+      transition: var(--transition);
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(108,60,225,.35);
+    }
+    .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(108,60,225,.45); }
+    .btn-outline {
+      background: transparent;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+    }
+    .btn-outline:hover { background: var(--primary-light); transform: translateY(-2px); }
+    .btn-accent {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(249,115,22,.35);
+    }
+    .btn-accent:hover { background: #e8610a; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(249,115,22,.45); }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50%       { transform: translateY(-12px); }
+    }
+    @keyframes pulse-ring {
+      0%   { transform: scale(.9); opacity: .6; }
+      70%  { transform: scale(1.15); opacity: 0; }
+      100% { transform: scale(.9); opacity: 0; }
+    }
+    @keyframes gradient-shift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    @keyframes count-up { from { opacity: 0; } to { opacity: 1; } }
+    .fade-up { animation: fadeUp .7s ease both; }
+    .delay-1 { animation-delay: .1s; }
+    .delay-2 { animation-delay: .2s; }
+    .delay-3 { animation-delay: .3s; }
+    .delay-4 { animation-delay: .4s; }
+
+    /* ===== NAVBAR ===== */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 0;
+      transition: var(--transition);
+    }
+    #navbar .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      padding: 0 32px;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid transparent;
+      transition: var(--transition);
+    }
+    #navbar.scrolled .nav-inner {
+      border-bottom-color: var(--gray-border);
+      box-shadow: var(--shadow-sm);
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--dark);
+    }
+    .nav-logo .logo-icon {
+      width: 38px; height: 38px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--primary), var(--teal));
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-weight: 900; font-size: 1rem;
+    }
+    .nav-logo span.accent { color: var(--primary); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .nav-links a {
+      font-size: .9rem;
+      font-weight: 500;
+      color: var(--gray);
+      padding: 7px 14px;
+      border-radius: 8px;
+      transition: var(--transition);
+    }
+    .nav-links a:hover { color: var(--primary); background: var(--primary-light); }
+    .nav-actions { display: flex; align-items: center; gap: 10px; }
+    .nav-actions .btn { padding: 9px 22px; font-size: .875rem; }
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+    }
+    .nav-hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--dark); border-radius: 2px;
+      transition: var(--transition);
+    }
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      padding: 16px 24px 24px;
+      background: #fff;
+      border-top: 1px solid var(--gray-border);
+    }
+    .mobile-menu a {
+      font-size: .95rem; font-weight: 500;
+      color: var(--dark);
+      padding: 10px 12px;
+      border-radius: 8px;
+      transition: var(--transition);
+    }
+    .mobile-menu a:hover { background: var(--primary-light); color: var(--primary); }
+    .mobile-menu .btn { width: 100%; justify-content: center; margin-top: 8px; }
+
+    /* ===== HERO ===== */
+    #hero {
+      min-height: 100vh;
+      padding-top: 72px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #1a1a4e 100%);
+      background-size: 200% 200%;
+      animation: gradient-shift 12s ease infinite;
+    }
+    .hero-bg-shapes {
+      position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+    }
+    .hero-bg-shapes .shape {
+      position: absolute;
+      border-radius: 50%;
+      opacity: .12;
+    }
+    .shape-1 { width: 520px; height: 520px; background: var(--primary); top: -120px; right: -100px; }
+    .shape-2 { width: 320px; height: 320px; background: var(--teal); bottom: -80px; left: -60px; }
+    .shape-3 { width: 200px; height: 200px; background: var(--accent); top: 40%; left: 38%; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      padding: 80px 0;
+    }
+    .hero-content { position: relative; z-index: 2; }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(108,60,225,.25);
+      border: 1px solid rgba(108,60,225,.5);
+      border-radius: 100px;
+      padding: 6px 16px;
+      color: #c4b5fd;
+      font-size: .85rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+    .hero-badge .dot { width: 8px; height: 8px; border-radius: 50%; background: #a78bfa; position: relative; }
+    .hero-badge .dot::before {
+      content: '';
+      position: absolute; inset: -3px;
+      border-radius: 50%;
+      background: rgba(167,139,250,.4);
+      animation: pulse-ring 2s ease-out infinite;
+    }
+    .hero-title {
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 900;
+      line-height: 1.1;
+      color: #fff;
+      margin-bottom: 24px;
+    }
+    .hero-title .gradient-text {
+      background: linear-gradient(90deg, #a78bfa, #67e8f9, #fbbf24);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-desc {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,.72);
+      margin-bottom: 36px;
+      max-width: 480px;
+      line-height: 1.7;
+    }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .hero-stats {
+      display: flex;
+      gap: 32px;
+      margin-top: 52px;
+      padding-top: 32px;
+      border-top: 1px solid rgba(255,255,255,.12);
+    }
+    .hero-stat-num {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1;
+    }
+    .hero-stat-label { font-size: .8rem; color: rgba(255,255,255,.6); margin-top: 4px; }
+    .hero-visual {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      animation: float 5s ease-in-out infinite;
+    }
+    .hero-card-main {
+      width: 320px;
+      background: rgba(255,255,255,.07);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      position: relative;
+    }
+    .hero-card-main .card-tag {
+      display: inline-block;
+      background: var(--success);
+      color: #fff;
+      border-radius: 100px;
+      font-size: .75rem;
+      font-weight: 700;
+      padding: 3px 12px;
+      margin-bottom: 14px;
+    }
+    .hero-card-main h3 { color: #fff; font-size: 1.15rem; font-weight: 700; margin-bottom: 8px; }
+    .hero-card-main p { color: rgba(255,255,255,.65); font-size: .88rem; margin-bottom: 18px; }
+    .hero-card-applicants {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .avatar-stack { display: flex; }
+    .avatar-stack .av {
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,.2);
+      margin-left: -8px;
+      font-size: .65rem;
+      font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff;
+    }
+    .av:first-child { margin-left: 0; }
+    .av-a { background: #7c3aed; }
+    .av-b { background: #0891b2; }
+    .av-c { background: #dc2626; }
+    .av-more { background: rgba(255,255,255,.2); }
+    .applicants-text { font-size: .8rem; color: rgba(255,255,255,.65); }
+    .hero-floating-card {
+      position: absolute;
+      background: rgba(255,255,255,.1);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      color: #fff;
+      font-size: .82rem;
+    }
+    .hero-floating-card.top-right { top: -24px; right: -40px; }
+    .hero-floating-card.bottom-left { bottom: -28px; left: -50px; }
+    .hfc-title { font-weight: 700; margin-bottom: 3px; }
+    .hfc-sub { color: rgba(255,255,255,.6); font-size: .76rem; }
+    .hfc-icon { font-size: 1.4rem; margin-bottom: 6px; }
+
+    /* ===== ABOUT ===== */
+    #about { padding: 100px 0; background: #fff; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+    .about-visual {
+      position: relative;
+    }
+    .about-img-wrap {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--primary-light), var(--teal-light));
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .about-illustration {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px;
+      gap: 20px;
+    }
+    .about-icon-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      width: 100%;
+    }
+    .about-icon-box {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 20px;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+    }
+    .about-icon-box .icon { font-size: 2rem; margin-bottom: 8px; }
+    .about-icon-box p { font-size: .8rem; font-weight: 600; color: var(--dark); }
+    .about-badge {
+      position: absolute;
+      bottom: -20px;
+      right: -20px;
+      background: var(--primary);
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      font-size: .85rem;
+      font-weight: 700;
+      box-shadow: var(--shadow-lg);
+      text-align: center;
+    }
+    .about-badge .num { font-size: 1.8rem; font-weight: 900; display: block; }
+    .about-content .section-sub { margin-bottom: 28px; }
+    .about-list { display: flex; flex-direction: column; gap: 14px; margin-top: 28px; }
+    .about-list-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .about-list-item .check {
+      width: 24px; height: 24px; min-width: 24px;
+      border-radius: 50%;
+      background: var(--primary-light);
+      color: var(--primary);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .8rem; font-weight: 700;
+      margin-top: 2px;
+    }
+    .about-list-item p { font-size: .95rem; color: var(--gray); }
+    .about-list-item strong { color: var(--dark); }
+
+    /* ===== PROGRAMS ===== */
+    #programs {
+      padding: 100px 0;
+      background: var(--gray-light);
+    }
+    .programs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .program-card {
+      background: #fff;
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      border: 1px solid var(--gray-border);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .program-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--teal));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: var(--transition);
+    }
+    .program-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+    .program-card:hover::before { transform: scaleX(1); }
+    .program-icon {
+      width: 52px; height: 52px;
+      border-radius: var(--radius);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+    .program-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
+    .program-card p { font-size: .9rem; color: var(--gray); margin-bottom: 20px; }
+    .program-meta {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .meta-tag {
+      font-size: .78rem;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 100px;
+      background: var(--gray-light);
+      color: var(--gray);
+    }
+    .program-card.featured {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #fff;
+      border-color: transparent;
+    }
+    .program-card.featured h3, .program-card.featured p { color: #fff; }
+    .program-card.featured p { opacity: .8; }
+    .program-card.featured .meta-tag { background: rgba(255,255,255,.15); color: rgba(255,255,255,.9); }
+    .program-card.featured .program-link { color: #fff; }
+    .program-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: .875rem; font-weight: 600;
+      color: var(--primary);
+      transition: var(--transition);
+    }
+    .program-link:hover { gap: 10px; }
+
+    /* ===== DOMAINS ===== */
+    #domains { padding: 100px 0; background: #fff; }
+    .domains-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .domain-card {
+      border-radius: var(--radius);
+      padding: 24px 20px;
+      text-align: center;
+      border: 1px solid var(--gray-border);
+      transition: var(--transition);
+      cursor: pointer;
+      background: #fff;
+    }
+    .domain-card:hover { border-color: var(--primary); background: var(--primary-light); transform: translateY(-4px); box-shadow: var(--shadow); }
+    .domain-card:hover .domain-icon { background: var(--primary); color: #fff; }
+    .domain-icon {
+      width: 52px; height: 52px;
+      border-radius: var(--radius);
+      background: var(--gray-light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      margin: 0 auto 14px;
+      transition: var(--transition);
+    }
+    .domain-card h4 { font-size: .9rem; font-weight: 700; margin-bottom: 6px; }
+    .domain-card p { font-size: .78rem; color: var(--gray); }
+
+    /* ===== WHY CHOOSE ===== */
+    #why { padding: 100px 0; background: var(--dark-2); }
+    #why .section-label { background: rgba(108,60,225,.25); color: #c4b5fd; }
+    #why .section-title { color: #fff; }
+    #why .section-sub { color: rgba(255,255,255,.6); }
+    .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .why-card {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      transition: var(--transition);
+    }
+    .why-card:hover { background: rgba(108,60,225,.15); border-color: rgba(108,60,225,.4); transform: translateY(-4px); }
+    .why-card-icon {
+      width: 52px; height: 52px;
+      border-radius: var(--radius);
+      background: rgba(108,60,225,.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+    .why-card h3 { font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 10px; }
+    .why-card p { font-size: .9rem; color: rgba(255,255,255,.6); line-height: 1.65; }
+
+    /* ===== MENTORSHIP ===== */
+    #mentorship { padding: 100px 0; background: #fff; }
+    .mentorship-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+    .mentorship-steps { display: flex; flex-direction: column; gap: 24px; }
+    .step-item {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+    .step-num {
+      width: 44px; height: 44px; min-width: 44px;
+      border-radius: 50%;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 1rem; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .step-num::after {
+      content: '';
+      position: absolute;
+      bottom: -24px; left: 50%;
+      transform: translateX(-50%);
+      width: 2px; height: 24px;
+      background: var(--primary-light);
+    }
+    .step-item:last-child .step-num::after { display: none; }
+    .step-content h4 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
+    .step-content p { font-size: .9rem; color: var(--gray); }
+    .mentorship-visual {
+      background: linear-gradient(135deg, var(--primary-light), var(--teal-light));
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      position: relative;
+    }
+    .mentor-cards { display: flex; flex-direction: column; gap: 14px; }
+    .mentor-card {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      box-shadow: var(--shadow-sm);
+    }
+    .mentor-av {
+      width: 48px; height: 48px; min-width: 48px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; font-weight: 700;
+      color: #fff;
+    }
+    .mentor-info h5 { font-size: .9rem; font-weight: 700; margin-bottom: 2px; }
+    .mentor-info p { font-size: .78rem; color: var(--gray); }
+    .mentor-badge {
+      margin-left: auto;
+      background: var(--success);
+      color: #fff;
+      font-size: .7rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 100px;
+    }
+
+    /* ===== WORKSHOPS ===== */
+    #workshops { padding: 100px 0; background: var(--gray-light); }
+    .workshops-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .workshop-card {
+      background: #fff;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--gray-border);
+      transition: var(--transition);
+    }
+    .workshop-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+    .workshop-banner {
+      height: 130px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.5rem;
+      position: relative;
+    }
+    .workshop-body { padding: 24px; }
+    .workshop-tag {
+      font-size: .75rem; font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+    .workshop-body h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .workshop-body p { font-size: .88rem; color: var(--gray); margin-bottom: 18px; }
+    .workshop-meta { display: flex; gap: 16px; align-items: center; }
+    .w-meta-item { display: flex; align-items: center; gap: 5px; font-size: .8rem; color: var(--gray); }
+    .register-btn {
+      margin-left: auto;
+      background: var(--primary-light);
+      color: var(--primary);
+      border: none;
+      border-radius: 100px;
+      font-size: .8rem; font-weight: 700;
+      padding: 6px 16px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .register-btn:hover { background: var(--primary); color: #fff; }
+
+    /* ===== TESTIMONIALS ===== */
+    #testimonials { padding: 100px 0; background: #fff; }
+    .testimonials-track {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .testimonial-card {
+      background: var(--gray-light);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      border: 1px solid transparent;
+      transition: var(--transition);
+    }
+    .testimonial-card:hover { border-color: var(--primary); background: var(--primary-light); }
+    .stars { color: #f59e0b; font-size: 1rem; margin-bottom: 14px; letter-spacing: 2px; }
+    .testimonial-text { font-size: .93rem; color: var(--gray); line-height: 1.7; margin-bottom: 20px; font-style: italic; }
+    .testimonial-author { display: flex; align-items: center; gap: 12px; }
+    .t-av {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; color: #fff; font-size: .9rem;
+    }
+    .t-name { font-size: .9rem; font-weight: 700; }
+    .t-role { font-size: .78rem; color: var(--gray); }
+
+    /* ===== STATS ===== */
+    #stats {
+      padding: 80px 0;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 50%, #1e1b4b 100%);
+    }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; text-align: center; }
+    .stat-block { position: relative; }
+    .stat-block::after {
+      content: '';
+      position: absolute;
+      right: 0; top: 15%; bottom: 15%;
+      width: 1px;
+      background: rgba(255,255,255,.15);
+    }
+    .stat-block:last-child::after { display: none; }
+    .stat-number {
+      font-size: clamp(2.2rem, 4vw, 3rem);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-plus { color: #a78bfa; }
+    .stat-label { font-size: .9rem; color: rgba(255,255,255,.7); font-weight: 500; }
+    .stat-icon { font-size: 1.6rem; margin-bottom: 10px; }
+
+    /* ===== FAQ ===== */
+    #faq { padding: 100px 0; background: var(--gray-light); }
+    .faq-list { display: flex; flex-direction: column; gap: 12px; max-width: 740px; margin: 0 auto; }
+    .faq-item {
+      background: #fff;
+      border-radius: var(--radius);
+      border: 1px solid var(--gray-border);
+      overflow: hidden;
+    }
+    .faq-question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      cursor: pointer;
+      font-size: .97rem;
+      font-weight: 600;
+      color: var(--dark);
+      transition: var(--transition);
+      user-select: none;
+    }
+    .faq-question:hover { color: var(--primary); }
+    .faq-icon {
+      width: 28px; height: 28px; min-width: 28px;
+      border-radius: 50%;
+      background: var(--primary-light);
+      color: var(--primary);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .9rem; font-weight: 700;
+      transition: var(--transition);
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .4s ease, padding .3s ease;
+    }
+    .faq-answer-inner {
+      padding: 0 24px 20px;
+      font-size: .9rem;
+      color: var(--gray);
+      line-height: 1.7;
+    }
+    .faq-item.open .faq-answer { max-height: 200px; }
+    .faq-item.open .faq-icon { background: var(--primary); color: #fff; transform: rotate(45deg); }
+
+    /* ===== CTA ===== */
+    #cta {
+      padding: 100px 0;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #1a1a4e);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    #cta::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(108,60,225,.35) 0%, transparent 70%);
+    }
+    .cta-content { position: relative; z-index: 2; }
+    .cta-title {
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+    .cta-title .gradient-text {
+      background: linear-gradient(90deg, #a78bfa, #67e8f9);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .cta-sub { font-size: 1.1rem; color: rgba(255,255,255,.7); margin-bottom: 40px; max-width: 520px; margin-left: auto; margin-right: auto; }
+    .cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .cta-features {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-top: 52px;
+      flex-wrap: wrap;
+    }
+    .cta-feature-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .9rem;
+      color: rgba(255,255,255,.7);
+    }
+    .cta-feature-item .ci { color: var(--success); font-size: 1rem; }
+
+    /* ===== FOOTER ===== */
+    #footer {
+      background: #0c0b1d;
+      color: rgba(255,255,255,.7);
+      padding: 72px 0 0;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 56px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .footer-brand .nav-logo { margin-bottom: 16px; }
+    .footer-brand p { font-size: .9rem; line-height: 1.7; max-width: 260px; }
+    .footer-socials {
+      display: flex;
+      gap: 10px;
+      margin-top: 24px;
+    }
+    .social-btn {
+      width: 38px; height: 38px;
+      border-radius: 10px;
+      background: rgba(255,255,255,.08);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,.7);
+      font-size: .85rem; font-weight: 700;
+      transition: var(--transition);
+    }
+    .social-btn:hover { background: var(--primary); color: #fff; transform: translateY(-2px); }
+    .footer-col h5 {
+      font-size: .9rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 18px;
+    }
+    .footer-col ul { display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a {
+      font-size: .88rem;
+      color: rgba(255,255,255,.55);
+      transition: var(--transition);
+    }
+    .footer-col ul li a:hover { color: #a78bfa; }
+    .footer-bottom {
+      padding: 24px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: .83rem;
+      color: rgba(255,255,255,.35);
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .footer-bottom a { color: rgba(255,255,255,.5); }
+    .footer-bottom a:hover { color: #a78bfa; }
+
+    /* ===== SCROLL TO TOP ===== */
+    #scrollTop {
+      position: fixed;
+      bottom: 32px; right: 32px;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-size: 1.2rem;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: var(--shadow-lg);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: var(--transition);
+      z-index: 999;
+    }
+    #scrollTop.visible { opacity: 1; transform: translateY(0); }
+    #scrollTop:hover { background: var(--primary-dark); transform: translateY(-2px); }
+
+    /* ===== INTERSECTION OBSERVER ANIMATIONS ===== */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .programs-grid, .why-grid { grid-template-columns: repeat(2, 1fr); }
+      .domains-grid { grid-template-columns: repeat(3, 1fr); }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+      .stat-block::after { display: none; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+    }
+    @media (max-width: 768px) {
+      .nav-links, .nav-actions { display: none; }
+      .nav-hamburger { display: flex; }
+      .mobile-menu.open { display: flex; }
+      .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+      .hero-visual { display: none; }
+      .hero-stats { gap: 24px; flex-wrap: wrap; }
+      .about-grid, .mentorship-grid { grid-template-columns: 1fr; gap: 40px; }
+      .about-badge { right: 0; }
+      .programs-grid, .workshops-grid, .testimonials-track { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: 1fr; }
+      .domains-grid { grid-template-columns: repeat(2, 1fr); }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .cta-features { flex-direction: column; align-items: center; }
+    }
+    @media (max-width: 480px) {
+      .domains-grid { grid-template-columns: 1fr 1fr; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .hero-actions { flex-direction: column; }
+      .hero-actions .btn { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <div class="logo-icon">IN</div>
+      Intern<span class="accent">Nova</span>
+    </a>
+
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#programs">Programs</a>
+      <a href="#domains">Domains</a>
+      <a href="#mentorship">Mentorship</a>
+      <a href="#workshops">Workshops</a>
+      <a href="#faq">FAQ</a>
+    </div>
+
+    <div class="nav-actions">
+      <a href="#cta" class="btn btn-outline">Login</a>
+      <a href="#cta" class="btn btn-primary">Apply Now →</a>
+    </div>
+
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about">About</a>
+    <a href="#programs">Programs</a>
+    <a href="#domains">Domains</a>
+    <a href="#mentorship">Mentorship</a>
+    <a href="#workshops">Workshops</a>
+    <a href="#faq">FAQ</a>
+    <a href="#cta" class="btn btn-primary">Apply Now →</a>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section id="hero">
+  <div class="hero-bg-shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+  </div>
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="hero-badge fade-up">
+          <span class="dot"></span>
+          🚀 Now Accepting Applications for 2025
+        </div>
+        <h1 class="hero-title fade-up delay-1">
+          Launch Your Career<br/>With <span class="gradient-text">Real-World</span><br/>Experience
+        </h1>
+        <p class="hero-desc fade-up delay-2">
+          InternNova connects ambitious students with industry-leading internship programs, expert mentorship and hands-on workshops — turning learning into career success.
+        </p>
+        <div class="hero-actions fade-up delay-3">
+          <a href="#cta" class="btn btn-primary">Start Your Journey →</a>
+          <a href="#programs" class="btn" style="background:rgba(255,255,255,.12); color:#fff; backdrop-filter:blur(10px);">Explore Programs</a>
+        </div>
+        <div class="hero-stats fade-up delay-4">
+          <div>
+            <div class="hero-stat-num">10K+</div>
+            <div class="hero-stat-label">Interns Placed</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">200+</div>
+            <div class="hero-stat-label">Partner Companies</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">50+</div>
+            <div class="hero-stat-label">Live Domains</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual fade-up delay-2">
+        <div class="hero-card-main">
+          <span class="card-tag">✓ Position Open</span>
+          <h3>Web Development Internship</h3>
+          <p>Build real products with a mentor-guided team. Remote · 3 months.</p>
+          <div class="hero-card-applicants">
+            <div class="avatar-stack">
+              <div class="av av-a">A</div>
+              <div class="av av-b">R</div>
+              <div class="av av-c">S</div>
+              <div class="av av-more">+9</div>
+            </div>
+            <span class="applicants-text">142 students applied</span>
+          </div>
+        </div>
+        <div class="hero-floating-card top-right">
+          <div class="hfc-icon">🎯</div>
+          <div class="hfc-title">Certificate Issued</div>
+          <div class="hfc-sub">Industry-recognised</div>
+        </div>
+        <div class="hero-floating-card bottom-left">
+          <div class="hfc-icon">⭐</div>
+          <div class="hfc-title">4.9 / 5 Rating</div>
+          <div class="hfc-sub">From 3000+ students</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-visual reveal">
+        <div class="about-img-wrap">
+          <div class="about-illustration">
+            <div class="about-icon-grid">
+              <div class="about-icon-box"><div class="icon">💼</div><p>Real Projects</p></div>
+              <div class="about-icon-box"><div class="icon">🎓</div><p>Certificates</p></div>
+              <div class="about-icon-box"><div class="icon">🤝</div><p>Mentorship</p></div>
+              <div class="about-icon-box"><div class="icon">🌐</div><p>Remote Work</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="about-badge">
+          <span class="num">5+</span>
+          Years of Impact
+        </div>
+      </div>
+
+      <div class="about-content reveal">
+        <span class="section-label">About InternNova</span>
+        <h2 class="section-title">We Bridge the Gap Between Students & Industry</h2>
+        <p class="section-sub">InternNova is a student-first platform that provides meaningful internship opportunities across 50+ domains. We believe every student deserves real work experience, not just theory.</p>
+        <div class="about-list">
+          <div class="about-list-item">
+            <div class="check">✓</div>
+            <p><strong>Industry-Validated Programs</strong> — Every internship is designed with input from actual hiring managers and tech leads.</p>
+          </div>
+          <div class="about-list-item">
+            <div class="check">✓</div>
+            <p><strong>Project-Based Learning</strong> — You work on real deliverables, not dummy tasks, building a portfolio that stands out.</p>
+          </div>
+          <div class="about-list-item">
+            <div class="check">✓</div>
+            <p><strong>Recognised Certificates</strong> — Our completion certificates are trusted by 200+ companies and hiring teams.</p>
+          </div>
+          <div class="about-list-item">
+            <div class="check">✓</div>
+            <p><strong>Zero Cost to Students</strong> — InternNova internships are completely free for students who qualify.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROGRAMS ===== -->
+<section id="programs">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-label">Internship Programs</span>
+      <h2 class="section-title">Programs Built for Your Growth</h2>
+      <p class="section-sub">Choose from structured tracks designed to build job-ready skills in weeks, not years.</p>
+    </div>
+    <div class="programs-grid">
+      <div class="program-card reveal">
+        <div class="program-icon" style="background:#ede9ff;font-size:1.5rem;">💻</div>
+        <h3>Web Development</h3>
+        <p>Build full-stack web applications using modern technologies like React, Node.js and cloud platforms under mentor supervision.</p>
+        <div class="program-meta">
+          <span class="meta-tag">8 Weeks</span>
+          <span class="meta-tag">Remote</span>
+          <span class="meta-tag">Certificate</span>
+        </div>
+        <br/>
+        <a href="#cta" class="program-link">Apply Now →</a>
+      </div>
+
+      <div class="program-card featured reveal">
+        <div class="program-icon" style="background:rgba(255,255,255,.2);font-size:1.5rem;">🤖</div>
+        <h3>AI & Machine Learning</h3>
+        <p>Work on real AI projects with datasets, model training and deployment — guided by ML engineers from top product companies.</p>
+        <div class="program-meta">
+          <span class="meta-tag">12 Weeks</span>
+          <span class="meta-tag">Remote</span>
+          <span class="meta-tag">Hot 🔥</span>
+        </div>
+        <br/>
+        <a href="#cta" class="program-link">Apply Now →</a>
+      </div>
+
+      <div class="program-card reveal">
+        <div class="program-icon" style="background:#e0f7fa;font-size:1.5rem;">📱</div>
+        <h3>Mobile App Development</h3>
+        <p>Design and launch iOS & Android apps using Flutter or React Native, from idea to app store submission.</p>
+        <div class="program-meta">
+          <span class="meta-tag">10 Weeks</span>
+          <span class="meta-tag">Remote</span>
+          <span class="meta-tag">Certificate</span>
+        </div>
+        <br/>
+        <a href="#cta" class="program-link">Apply Now →</a>
+      </div>
+
+      <div class="program-card reveal">
+        <div class="program-icon" style="background:#fef3c7;font-size:1.5rem;">📊</div>
+        <h3>Data Science & Analytics</h3>
+        <p>Turn raw data into business insights using Python, Pandas, Tableau and statistical analysis with real company datasets.</p>
+        <div class="program-meta">
+          <span class="meta-tag">8 Weeks</span>
+          <span class="meta-tag">Remote</span>
+          <span class="meta-tag">Certificate</span>
+        </div>
+        <br/>
+        <a href="#cta" class="program-link">Apply Now →</a>
+      </div>
+
+      <div class="program-card reveal">
+        <div class="program-icon" style="background:#fce7f3;font-size:1.5rem;">🎨</div>
+        <h3>UI/UX Design</h3>
+        <p>Create user-centric interfaces using Figma, conduct usability research and ship designs that real teams implement.</p>
+        <div class="program-meta">
+          <span class="meta-tag">6 Weeks</span>
+          <span class="meta-tag">Remote</span>
+          <span class="meta-tag">Certificate</span>
+        </div>
+        <br/>
+        <a href="#cta" class="program-link">Apply Now →</a>
+      </div>
+
+      <div class="program-card reveal">
+        <div class="program-icon" style="background:#f0fdf4;font-size:1.5rem;">🔐</div>
+        <h3>Cybersecurity</h3>
+        <p>Learn ethical hacking, vulnerability assessment and security auditing through real-world challenges and CTF scenarios.</p>
+        <div class="program-meta">
+          <span class="meta-tag">10 Weeks</span>
+          <span class="meta-tag">Remote</span>
+          <span class="meta-tag">Certificate</span>
+        </div>
+        <br/>
+        <a href="#cta" class="program-link">Apply Now →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DOMAINS ===== -->
+<section id="domains">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-label">Internship Domains</span>
+      <h2 class="section-title">50+ Domains to Explore</h2>
+      <p class="section-sub">From technology to business, find your niche and start building expertise that employers actually want.</p>
+    </div>
+    <div class="domains-grid">
+      <div class="domain-card reveal"><div class="domain-icon">🌐</div><h4>Web Dev</h4><p>Frontend & Backend</p></div>
+      <div class="domain-card reveal"><div class="domain-icon">🤖</div><h4>AI / ML</h4><p>Deep Learning, NLP</p></div>
+      <div class="domain-card reveal"><div class="domain-icon">📱</div><h4>App Dev</h4><p>iOS, Android, Flutter</p></div>
+      <div class="domain-card reveal"><div class="domain-icon">☁️</div><h4>Cloud & DevOps</h4><p>AWS, GCP, Docker</p></div>
+      <div class="domain-card reveal"><div class="domain-icon">🔐</div><h4>Cybersecurity</h4><p>Ethical Hacking</p></div>
+      <div class="domain-card reveal"><div class="domain-icon">📊</div><h4>Data Science</h4><p>Analytics, Tableau</p></div>
+      <div class="domain-card reveal"><div class="domain-icon">🎨</div><h4>UI/UX Design</h4><p>Figma, Research</p></div>
+      <div class="domain-card reveal"><div class="domain-icon">📢</div><h4>Digital Marketing</h4><p>SEO, Social Media</p></div>
+      <div class="domain-card reveal"><div class="domain-icon">💰</div><h4>Finance & FinTech</h4><p>Markets, Fintech</p></div>
+      <div class="domain-card reveal"><div class="domain-icon">⚙️</div><h4>Blockchain</h4><p>Web3, Smart Contracts</p></div>
+      <div class="domain-card reveal"><div class="domain-icon">🎮</div><h4>Game Dev</h4><p>Unity, Unreal</p></div>
+      <div class="domain-card reveal"><div class="domain-icon">📝</div><h4>Content Writing</h4><p>Tech, SEO Writing</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WHY CHOOSE ===== -->
+<section id="why">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-label">Why InternNova</span>
+      <h2 class="section-title">What Sets Us Apart</h2>
+      <p class="section-sub">We don't just offer internships — we build careers with purpose-driven programs and human-first mentorship.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <div class="why-card-icon">🏆</div>
+        <h3>Industry-Recognised Certificates</h3>
+        <p>Every certificate carries the InternNova badge trusted by 200+ companies. Showcase it on LinkedIn, your resume and GitHub.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-card-icon">🧑‍💻</div>
+        <h3>Real Projects, Real Impact</h3>
+        <p>Work on projects that get deployed, used by real users and reviewed by engineering teams — not sandbox simulations.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-card-icon">👨‍🏫</div>
+        <h3>Expert Mentors from Top Companies</h3>
+        <p>Get weekly 1-on-1 sessions with mentors from Google, Infosys, Zomato, Razorpay and more product-led companies.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-card-icon">🌍</div>
+        <h3>100% Remote & Flexible</h3>
+        <p>Study, work and grow from anywhere in India. Flexible deadlines are designed around your college schedule.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-card-icon">🎓</div>
+        <h3>Placement Assistance</h3>
+        <p>InternNova alumni get priority access to curated job openings, interview prep sessions and referrals from our partner network.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-card-icon">💸</div>
+        <h3>Free for Students</h3>
+        <p>No hidden fees. Every program, workshop and mentorship session is 100% free for qualifying students — because talent deserves opportunity.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MENTORSHIP ===== -->
+<section id="mentorship">
+  <div class="container">
+    <div class="mentorship-grid">
+      <div class="mentorship-content reveal">
+        <span class="section-label">Learning & Mentorship</span>
+        <h2 class="section-title">Guided Growth at Every Step</h2>
+        <p class="section-sub" style="margin-bottom:36px;">Our structured mentorship model ensures no intern feels lost. From day one to final demo, we're with you.</p>
+        <div class="mentorship-steps">
+          <div class="step-item">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <h4>Onboarding & Goal Setting</h4>
+              <p>Meet your mentor, align on your goals and get a personalised 4-week learning roadmap.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <h4>Weekly 1-on-1 Sessions</h4>
+              <p>Deep-dive review of your work, live code walkthroughs and skill-targeted feedback every week.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <h4>Community & Peer Learning</h4>
+              <p>Join cohort Slack groups, pair-programming sessions and community challenges with fellow interns.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">4</div>
+            <div class="step-content">
+              <h4>Final Showcase & Certificate</h4>
+              <p>Demo your project to a panel of industry mentors, receive detailed feedback and earn your certificate.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mentorship-visual reveal">
+        <div class="mentor-cards">
+          <div class="mentor-card">
+            <div class="mentor-av" style="background:linear-gradient(135deg,#7c3aed,#5b21b6);">AK</div>
+            <div class="mentor-info">
+              <h5>Arjun Kumar</h5>
+              <p>Senior SDE · Google India</p>
+            </div>
+            <span class="mentor-badge">Web Dev</span>
+          </div>
+          <div class="mentor-card">
+            <div class="mentor-av" style="background:linear-gradient(135deg,#0891b2,#0e7490);">PR</div>
+            <div class="mentor-info">
+              <h5>Priya Rathi</h5>
+              <p>ML Engineer · Razorpay</p>
+            </div>
+            <span class="mentor-badge">AI/ML</span>
+          </div>
+          <div class="mentor-card">
+            <div class="mentor-av" style="background:linear-gradient(135deg,#f97316,#ea580c);">SM</div>
+            <div class="mentor-info">
+              <h5>Siddharth Mehta</h5>
+              <p>Product Designer · Zomato</p>
+            </div>
+            <span class="mentor-badge">UI/UX</span>
+          </div>
+          <div class="mentor-card">
+            <div class="mentor-av" style="background:linear-gradient(135deg,#10b981,#059669);">DV</div>
+            <div class="mentor-info">
+              <h5>Deepa Venkat</h5>
+              <p>Data Scientist · Infosys</p>
+            </div>
+            <span class="mentor-badge">Data</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WORKSHOPS ===== -->
+<section id="workshops">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-label">Workshops</span>
+      <h2 class="section-title">Live Workshops to Sharpen Skills</h2>
+      <p class="section-sub">Free, hands-on workshops conducted by industry professionals every week. Register and level up fast.</p>
+    </div>
+    <div class="workshops-grid">
+      <div class="workshop-card reveal">
+        <div class="workshop-banner" style="background:linear-gradient(135deg,#ede9ff,#ddd6fe);">🌐</div>
+        <div class="workshop-body">
+          <div class="workshop-tag">Web Development</div>
+          <h3>Build & Deploy a Full-Stack App in 3 Hours</h3>
+          <p>Hands-on session covering React, Express, MongoDB and Vercel deployment from scratch.</p>
+          <div class="workshop-meta">
+            <span class="w-meta-item">📅 Every Saturday</span>
+            <span class="w-meta-item">⏱ 3 hrs</span>
+            <button class="register-btn">Register Free</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="workshop-card reveal">
+        <div class="workshop-banner" style="background:linear-gradient(135deg,#fef3c7,#fde68a);">🤖</div>
+        <div class="workshop-body">
+          <div class="workshop-tag">AI / Machine Learning</div>
+          <h3>Introduction to LLMs & Prompt Engineering</h3>
+          <p>Explore how large language models work and how to engineer prompts for real-world use cases.</p>
+          <div class="workshop-meta">
+            <span class="w-meta-item">📅 Every Sunday</span>
+            <span class="w-meta-item">⏱ 2 hrs</span>
+            <button class="register-btn">Register Free</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="workshop-card reveal">
+        <div class="workshop-banner" style="background:linear-gradient(135deg,#fce7f3,#fbcfe8);">🎨</div>
+        <div class="workshop-body">
+          <div class="workshop-tag">UI/UX Design</div>
+          <h3>Figma Masterclass: Design to Prototype</h3>
+          <p>Design a complete mobile app UI with auto-layout, components and interactive prototyping in Figma.</p>
+          <div class="workshop-meta">
+            <span class="w-meta-item">📅 Bi-weekly</span>
+            <span class="w-meta-item">⏱ 2.5 hrs</span>
+            <button class="register-btn">Register Free</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section id="testimonials">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-label">Student Testimonials</span>
+      <h2 class="section-title">What Our Interns Say</h2>
+      <p class="section-sub">Real stories from students who turned their InternNova experience into careers.</p>
+    </div>
+    <div class="testimonials-track">
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"InternNova's web development program completely changed my trajectory. I went from barely knowing HTML to building and deploying full-stack projects within 8 weeks. The mentorship was phenomenal."</p>
+        <div class="testimonial-author">
+          <div class="t-av" style="background:linear-gradient(135deg,#7c3aed,#5b21b6);">RA</div>
+          <div>
+            <div class="t-name">Rahul Agarwal</div>
+            <div class="t-role">SDE Intern · Zepto · Delhi</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"The AI/ML internship here is unmatched. I built a real sentiment analysis model that's now in production at a startup. My mentor guided me through every challenge with patience and expertise."</p>
+        <div class="testimonial-author">
+          <div class="t-av" style="background:linear-gradient(135deg,#0891b2,#0e7490);">SP</div>
+          <div>
+            <div class="t-name">Sneha Pillai</div>
+            <div class="t-role">ML Engineer Intern · Bangalore</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Getting an internship before final year felt impossible until InternNova. The program structured everything — projects, mentors, certificates. I got placed at a product company within 3 months."</p>
+        <div class="testimonial-author">
+          <div class="t-av" style="background:linear-gradient(135deg,#f97316,#ea580c);">KM</div>
+          <div>
+            <div class="t-name">Karan Malhotra</div>
+            <div class="t-role">Product Intern · Mumbai</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STATS ===== -->
+<section id="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-block reveal">
+        <div class="stat-icon">👩‍💻</div>
+        <div class="stat-number">10,000<span class="stat-plus">+</span></div>
+        <div class="stat-label">Students Trained</div>
+      </div>
+      <div class="stat-block reveal">
+        <div class="stat-icon">🏢</div>
+        <div class="stat-number">200<span class="stat-plus">+</span></div>
+        <div class="stat-label">Partner Companies</div>
+      </div>
+      <div class="stat-block reveal">
+        <div class="stat-icon">🗂️</div>
+        <div class="stat-number">50<span class="stat-plus">+</span></div>
+        <div class="stat-label">Internship Domains</div>
+      </div>
+      <div class="stat-block reveal">
+        <div class="stat-icon">⭐</div>
+        <div class="stat-number">4.9<span class="stat-plus">/5</span></div>
+        <div class="stat-label">Average Rating</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section id="faq">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-label">FAQ</span>
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <p class="section-sub">Got questions? We've got answers. If you still need help, reach us at support@internnova.co.in</p>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item open">
+        <div class="faq-question">
+          Is InternNova completely free for students?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Yes! All InternNova programs, workshops and mentorship sessions are 100% free for eligible students. We believe opportunity should never be gated by financial barriers. There are no registration fees, no subscription charges and no hidden costs at any stage.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          Do I need prior experience to apply?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Not necessarily. Most programs have beginner-friendly tracks that assume no prior professional experience. What we look for is curiosity, commitment and the eagerness to learn. Some advanced tracks may require foundational skills, which are clearly mentioned on the program page.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          Will I receive a certificate after completing the internship?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Yes. Every intern who successfully completes their program and submits their final project receives a digitally verified certificate from InternNova. These certificates are trusted by 200+ companies and can be displayed on LinkedIn, your resume and portfolio sites.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          How long are the internship programs?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Programs range from 4 to 12 weeks depending on the domain and track. Shorter intensive programs focus on specific skill sets while longer programs cover end-to-end project development. All programs are flexible and designed to fit your college schedule.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          Are the internships remote or in-office?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">All InternNova internships are 100% remote. You can participate from anywhere in India, at your own pace within the program timeline. We provide all required tools, communication channels and mentor access digitally.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          Can I apply if I'm from a non-engineering background?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Absolutely! We welcome students from all academic backgrounds — arts, commerce, science, management and more. Domains like Digital Marketing, Content Writing, UI/UX Design and Finance are perfect for non-engineers who want to build industry skills.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section id="cta">
+  <div class="container">
+    <div class="cta-content reveal">
+      <span class="section-label" style="background:rgba(108,60,225,.25);color:#c4b5fd;">Limited Seats Available</span>
+      <h2 class="cta-title">Ready to <span class="gradient-text">Take the Leap?</span></h2>
+      <p class="cta-sub">Join thousands of students who turned internship experience into full-time careers. Apply today — it's free, flexible and fully remote.</p>
+      <div class="cta-actions">
+        <a href="https://internnova.co.in" target="_blank" class="btn btn-primary" style="font-size:1rem; padding:15px 36px;">Apply for Free →</a>
+        <a href="#programs" class="btn" style="background:rgba(255,255,255,.12);color:#fff;font-size:1rem;padding:15px 36px;">Explore Programs</a>
+      </div>
+      <div class="cta-features">
+        <span class="cta-feature-item"><span class="ci">✓</span> No registration fee</span>
+        <span class="cta-feature-item"><span class="ci">✓</span> 100% remote & flexible</span>
+        <span class="cta-feature-item"><span class="ci">✓</span> Expert mentors included</span>
+        <span class="cta-feature-item"><span class="ci">✓</span> Industry certificate</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer id="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo">
+          <div class="logo-icon">IN</div>
+          Intern<span class="accent" style="color:#a78bfa;">Nova</span>
+        </div>
+        <p>Empowering India's next generation of professionals through real-world internships, expert mentorship and free workshops since 2019.</p>
+        <div class="footer-socials">
+          <a href="https://internnova.co.in" class="social-btn" title="Website">🌐</a>
+          <a href="#" class="social-btn" title="LinkedIn">in</a>
+          <a href="#" class="social-btn" title="Instagram">📸</a>
+          <a href="#" class="social-btn" title="Twitter/X">𝕏</a>
+          <a href="#" class="social-btn" title="Telegram">✈</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h5>Programs</h5>
+        <ul>
+          <li><a href="#programs">Web Development</a></li>
+          <li><a href="#programs">AI & Machine Learning</a></li>
+          <li><a href="#programs">Mobile App Dev</a></li>
+          <li><a href="#programs">Data Science</a></li>
+          <li><a href="#programs">UI/UX Design</a></li>
+          <li><a href="#programs">Cybersecurity</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#why">Why InternNova</a></li>
+          <li><a href="#mentorship">Mentorship</a></li>
+          <li><a href="#workshops">Workshops</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="mailto:support@internnova.co.in">support@internnova.co.in</a></li>
+          <li><a href="https://internnova.co.in">www.internnova.co.in</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Refund Policy</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2025 InternNova. All rights reserved. Designed for InternNova Redesign Challenge.</span>
+      <span>Made with ❤️ for India's student community</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== SCROLL TO TOP BUTTON ===== -->
+<button id="scrollTop" aria-label="Scroll to top">↑</button>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+  // Navbar scroll behavior
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 20);
+  }, { passive: true });
+
+  // Hamburger menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+  });
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  });
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-question').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  // Intersection Observer for reveal animations
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  // Scroll to top button
+  const scrollTopBtn = document.getElementById('scrollTop');
+  window.addEventListener('scroll', () => {
+    scrollTopBtn.classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
+  scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // Animated stat counters
+  function animateCounter(el, target, suffix, duration = 2000) {
+    const isDecimal = target % 1 !== 0;
+    let start = 0;
+    const step = target / (duration / 16);
+    const timer = setInterval(() => {
+      start += step;
+      if (start >= target) { start = target; clearInterval(timer); }
+      el.textContent = isDecimal ? start.toFixed(1) : Math.floor(start).toLocaleString();
+    }, 16);
+  }
+
+  const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const nums = entry.target.querySelectorAll('.stat-number');
+        const targets = [10000, 200, 50, 4.9];
+        nums.forEach((num, i) => {
+          const suffix = num.querySelector('.stat-plus');
+          const suffixText = suffix ? suffix.textContent : '';
+          const span = document.createElement('span');
+          num.innerHTML = '';
+          num.appendChild(span);
+          if (suffix) { const s = document.createElement('span'); s.className = 'stat-plus'; s.textContent = suffixText; num.appendChild(s); }
+          animateCounter(span, targets[i], suffixText);
+        });
+        statsObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  const statsSection = document.getElementById('stats');
+  if (statsSection) statsObserver.observe(statsSection);
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
